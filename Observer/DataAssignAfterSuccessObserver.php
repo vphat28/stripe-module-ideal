@@ -91,6 +91,9 @@ class DataAssignAfterSuccessObserver implements ObserverInterface
             return;
         }
 
+        $order->setState('new');
+        $order->setStatus('pending');
+
         // If found stripe source id store it in database
         if ($order->getData('stripe_source_id')) {
             $source = $this->sourceFactory->create();
