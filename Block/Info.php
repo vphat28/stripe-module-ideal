@@ -55,7 +55,7 @@ class Info extends ConfigurableInfo
     {
         $info = parent::getSpecificInformation();
 
-        if ($this->getIsSecureMode()) {
+        if (!$this->getIsSecureMode()) {
             /** @var Payment $payment */
             $payment = $this->getInfo();
 
@@ -76,17 +76,5 @@ class Info extends ConfigurableInfo
         }
 
         return $info;
-    }
-    public function getIsSecureMode()
-    {
-        $method = $this->getMethod();
-        if (!$method) {
-            return true;
-        }
-
-        $store = $method->getStore();
-        $methodStore = $this->_storeManager->getStore($store);
-
-        return $methodStore->getCode() != \Magento\Store\Model\Store::ADMIN_CODE;
     }
 }
